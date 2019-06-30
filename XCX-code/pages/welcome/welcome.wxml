@@ -1,0 +1,57 @@
+<view class="container">
+    <image class="user-avatar" src="/images/avatar/1.png"></image>
+    <text class="user-name">hello,Xiaocc</text>
+    <view class="moto-container" >
+        <text class ="moto" bindtap="onTap">开启小程序之旅</text>
+    </view>
+
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
