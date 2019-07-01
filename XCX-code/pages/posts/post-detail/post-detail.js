@@ -4,7 +4,7 @@ Page({
 
  
   data: {
-    
+    isPlayingMusic:false
   },
 
   /**
@@ -31,7 +31,7 @@ Page({
   //   console.log(game)
     
    var postsCollected =wx.getStorageSync('posts_collected')
-   if(postsCollected){
+    if (postsCollected & postCollected){
      var postCollected =postsCollected[postId]
      this.setData({
        collected:postCollected
@@ -112,7 +112,35 @@ Page({
       }
     })
 
+  },
+  
+  onMusicTap:function(event){
+    var isPlayingMusic = this.data.isPlayingMusic;
+    var currentPostId = this.data.currentPostId;
+    var musicData=postsData.postList[currentPostId]
+    if (isPlayingMusic){
+      wx.pauseBackgroundAudio()
+      //除了在onload里面做数据绑定时，用this.data=xxx;其余的都是用this.setData
+      this.setData({
+        isPlayingMusic:false
+      })
+
+    }
+    else{
+      wx.playBackgroundAudio({
+        dataUrl:musicData.music.url,
+        title:musicData.music.title
+        
+      })
+      this.setData({
+        isPlayingMusic: true
+      })
+
+    }
+  
+
   }
+
 })
 
 
