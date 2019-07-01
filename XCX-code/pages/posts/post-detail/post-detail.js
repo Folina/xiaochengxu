@@ -43,6 +43,25 @@ Page({
      wx.setStorageSync('posts_collected', postsCollected);
 
    }
+
+
+  //监听音乐播放状态
+  var that = this
+  wx.onBackgroundAudioPlay(function(){
+      that.setData(
+        {
+          isPlayingMusic:true
+        }
+      )
+  })
+//监听音乐暂停状态
+  wx.onBackgroundAudioPause(function(){
+    that.setData({
+      isPlayingMusic: false
+    })
+  })
+    
+
   },
   onCollectedTap:function(event){
     //获取缓存值
