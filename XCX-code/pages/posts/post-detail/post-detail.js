@@ -44,6 +44,7 @@ Page({
      wx.setStorageSync('posts_collected', postsCollected);
 
    }
+
     if (app.globalData.g_isPlayingMusic && app.globalData.g_currentPostId == postId){
       this.setData({
 
