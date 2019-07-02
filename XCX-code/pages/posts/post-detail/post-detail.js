@@ -44,17 +44,13 @@ Page({
      wx.setStorageSync('posts_collected', postsCollected);
 
    }
-    if (app.globalData.g_isPlayingMusic){
+    if (app.globalData.g_isPlayingMusic && app.globalData.g_currentPostId == postId){
       this.setData({
 
         isPlayingMusic:true
       })
-
     }
-
     this.onAudioMonitor()
-  
-
   },
   onAudioMonitor:function(event){
     //监听音乐播放状态
@@ -66,7 +62,10 @@ Page({
         }
       )
       //全局变量的g_isPlayingMusic赋值与局部变量的值相同
-      app.globalData.g_isPlayingMusic=true
+      app.globalData.g_isPlayingMusic=true,
+      
+      //音乐播放后，把g_currentPostId设置为空，这样点击下一个音乐时，状态为初始化状态
+      app.globalData.g_currentPostId=null
 
     })
     //监听音乐暂停状态
