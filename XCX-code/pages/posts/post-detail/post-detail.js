@@ -1,4 +1,5 @@
 var postsData =require("../../../datas/post-data/post-data.js")
+var app=getApp();
 
 Page({
 
@@ -43,24 +44,39 @@ Page({
      wx.setStorageSync('posts_collected', postsCollected);
 
    }
+    if (app.globalData.g_isPlayingMusic){
+      this.setData({
 
+        isPlayingMusic:true
+      })
 
-  //监听音乐播放状态
-  var that = this
-  wx.onBackgroundAudioPlay(function(){
+    }
+
+    this.onAudioMonitor()
+  
+
+  },
+  onAudioMonitor:function(event){
+    //监听音乐播放状态
+    var that = this
+    wx.onBackgroundAudioPlay(function () {
       that.setData(
         {
-          isPlayingMusic:true
+          isPlayingMusic: true
         }
       )
-  })
-//监听音乐暂停状态
-  wx.onBackgroundAudioPause(function(){
-    that.setData({
-      isPlayingMusic: false
+      //全局变量的g_isPlayingMusic赋值与局部变量的值相同
+      app.globalData.g_isPlayingMusic=true
+
     })
-  })
-    
+    //监听音乐暂停状态
+    wx.onBackgroundAudioPause(function () {
+      that.setData({
+        isPlayingMusic: false
+      })
+    })
+    app.globalData.g_isPlayingMusic = false
+
 
   },
   onCollectedTap:function(event){
