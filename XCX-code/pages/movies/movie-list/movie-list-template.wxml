@@ -1,0 +1,19 @@
+<import src="../movie/movie-template.wxml" />
+<template name="movieListTemplate">
+
+<view>
+  <view>
+    <text> </text>
+  </view>
+
+  <view>
+    <text></text>
+    <image></image>
+  </view>
+  <template is="movieTempalte" />
+  <template is="movieTempalte" />
+  <template is="movieTempalte" />
+
+</view>
+
+</template>

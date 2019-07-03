@@ -18,7 +18,7 @@
     "list":[
        {
         "pagePath":"pages/posts/post",
-        "text":"文章",
+        "text":"阅读",
         "iconPath":"/images/tab/yuedu.png",
         "selectedIconPath":"/images/tab/yuedu_hl.png"
        },
