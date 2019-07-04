@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
 }
+.inner-container{
+  margin: 0 auto 20rpx;
+}
 .movie-head{
   padding: 30rpx 20rpx 22rpx;
 }

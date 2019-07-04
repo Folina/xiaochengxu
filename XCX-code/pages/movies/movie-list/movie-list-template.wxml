@@ -2,6 +2,7 @@
 <template name="movieListTemplate">
 
 <view class="movie-list-container">
+  <view class='inner-container'>
   <view class='movie-head'>
     <text class="slogan">正在热映 </text>
     <view class='move'>
@@ -16,5 +17,5 @@
     </view>
 
   </view>
-
+</view>
 </template>
