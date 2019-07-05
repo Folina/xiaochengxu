@@ -2,9 +2,9 @@
 
 <template name='movieTamplate'>
     <view class='movie-container'>
-      <image class='movie-img' src='/images/crab.png'></image>
-      <text class='movie-title'>动物世界</text>
-      <template is='starsTemplate' />
+      <image class='movie-img' src='{{coverageUrl}}'></image>
+      <text class='movie-title'>{{title}}</text>
+      <template is='starsTemplate' data="{{average}}" />
     </view>
 
 </template>
