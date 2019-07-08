@@ -15,3 +15,7 @@
   height: 17rpx;
   width:17rpx;
 }
+
+.star-score{
+  
+}

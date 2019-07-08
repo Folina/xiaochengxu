@@ -1,3 +1,4 @@
+var util = require('../../utils/util.js');
 var app = getApp();
 
 Page({
@@ -34,20 +35,23 @@ Page({
 
   },
 
-  processMovieData: function (moivesData, settledKey){
+  processMovieData: function (moivesDouBan, settledKey){
     var movies =[];
-    for(var idx in moivesData.subjects){
-      var subject = moivesData.subjects[idx];
+    for (var idx in moivesDouBan.subjects){
+      var subject = moivesDouBan.subjects[idx];
       var title = subject.title
       if(title.length>6){
         title =title.substring(0,6)+"..."
       };
       var temp={
+        stars: util.convertToStarsArray(subject.rating.stars),
+        // stars: subject.rating.stars,
         title:title,
         average:subject.rating.average,
         coverageUrl:subject.images.large,
         movieId:subject.id
       }
+     
       movies.push(temp)
 
       //用动态的数据绑定
@@ -58,6 +62,7 @@ Page({
       this.setData(readyData)
 
     }
+  
 
   }
   
