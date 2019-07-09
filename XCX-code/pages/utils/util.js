@@ -1,21 +1,3 @@
-// function covertToStarsArray(stars){
-//   var num =stars.toString().substring(0,1);
-//   var arr =[];
-//   for(var i =1;i<=5;i++){
-//     if(i<=num){
-//       array.push(1);
-//     }
-//     else{
-//       array.push(0);
-//     }
-//   }
-//   return array();
-// }
-
-// module.exports={
-//   covertToStarsArray: covertToStarsArray
-// }
-
 function convertToStarsArray(stars) {  //把星级存到数组中  
   var num = stars.toString().substring(0, 1);
   var array = [];
