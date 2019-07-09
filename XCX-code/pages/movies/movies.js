@@ -15,7 +15,6 @@ Page({
     this.getMovieDataList(comingSoon, "comingSoon", "即将上映");
     this.getMovieDataList(top250, "top250", "豆瓣Top250");
 
-   
   },
   getMovieDataList: function (url, settledKey, categoryTitle){
     var that =this;
@@ -31,6 +30,17 @@ Page({
         console.log(res.data)
         that.processMovieData(res.data, settledKey, categoryTitle)
       }
+    })
+
+  },
+
+
+//点击更多跳转到另一个界面
+//有三个更多，点击更多跳转到对应电影目录分类界面
+  onMoreTap:function(event){
+    var category = event.currentTarget.dataset.category;
+    wx.navigateTo({
+      url: 'more-movies/more-movies?category=' + category,
     })
 
   },
