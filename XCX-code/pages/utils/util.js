@@ -11,7 +11,23 @@ function convertToStarsArray(stars) {  //把星级存到数组中
   }
   return array;
 }
+
+function http(url,callBack){
+  wx.request({
+    url: url,
+    method: "GET",
+    header: {
+      'content-type': 'application/xml' //   application/json 会报400,'https://douban.uieee.com/v2/movie/top250',
+    },
+    success(res) {
+      callBack(res.data)
+    }
+  })
+
+}
+
 module.exports = {
-  convertToStarsArray: convertToStarsArray
+  convertToStarsArray: convertToStarsArray,
+  http:http
 
 }
