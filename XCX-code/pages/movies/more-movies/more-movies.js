@@ -1,6 +1,6 @@
 // pages/movies/more-movies/more-movies.js
 var app = getApp();
-util =require('../../utils/util.js');
+var util =require('../../utils/util.js');
 Page({
   data: {
     movies:{},
@@ -21,13 +21,8 @@ Page({
         dataUrl = app.globalData.doubanBase + "/v2/movie/top250"
         break;
     }
-    util.http(dataUrl,this.callBack)
+    util.http(dataUrl, this.processMovieData)
   },
-
-  callBack:function(data){
-    console.log(data)
-  },
-
 
   processMovieData: function (moivesDouBan) {
     var movies = [];
