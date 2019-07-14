@@ -3,11 +3,11 @@ var app = getApp();
 var util =require('../../utils/util.js');
 Page({
   data: {
-    movies:{},
+    movies:[],
     navigationBarTitle:"",
     requestUrl:"",//为了能够在其他函数中调用，在data这里必须初始化
     totalCount:0,
-    isEmpty:"true" //设置一个空值来判断这个电影加载的数据是否为空
+    isEmpty:true //设置一个空值来判断这个电影加载的数据是否为空
   },
   onLoad: function (options) {
    var category = options.category;
@@ -16,7 +16,7 @@ Page({
     switch(category){
       case "正在热映":
         dataUrl = app.globalData.doubanBase +"/v2/movie/in_theaters"
-      break;
+        break;
       case "即将上映":
         dataUrl = app.globalData.doubanBase + "/v2/movie/coming_soon"
         break;
@@ -30,49 +30,49 @@ Page({
     util.http(dataUrl, this.processMovieData)
   },
 
-  onScollerLower:function(event){
-     var nextUrl = this.data.requestUrl+"?start="+this.data.totalCount+"&count=20"
+  onScrollerLower:function(event){
+    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20"
     util.http(nextUrl, this.processMovieData)
+    console.log("加载更多")
+    
   },
 
-  processMovieData: function (moivesDouBan) {
+  processMovieData: function (moviesDouban) {
     var movies = [];
-    for (var idx in moivesDouBan.subjects) {
-      var subject = moivesDouBan.subjects[idx];
-      var title = subject.title
-      if (title.length > 6) {
-        title = title.substring(0, 6) + "..."
-      };
+    for (var idx in moviesDouban.subjects) {
+      var subject = moviesDouban.subjects[idx];
+      var title = subject.title;
+      if (title.length >= 6) {
+        title = title.substring(0, 6) + "...";
+      }
+      // [1,1,1,1,1] [1,1,1,0,0]
       var temp = {
         stars: util.convertToStarsArray(subject.rating.stars),
-        // stars: subject.rating.stars,
         title: title,
         average: subject.rating.average,
         coverageUrl: subject.images.large,
         movieId: subject.id
       }
-      //设置一个总电影数，假如数据不为空的话，之前的数据和现在的数据合并，
-      //否则的话，就把现在加载的数据赋值给总数据，然后把当前的状态改成false
-       var totalMovies={};
-      if(!this.data.isEmpty){
-        totalMovies=this.data.movies.concat(movies);
-      }
-      else{
-        totalMovies=movies
-        this.data.isEmpty=false
-      }
       movies.push(temp)
-      this.setData({
-        movies: totalMovies
-      })
-      //每次获取完数据就加20条，实现递增
-      this.data.totalCount += 20
-      console.log(totalMovies)
     }
+
+    //之前出现重复的情况，是因为我把判断写在for 循环里面了
+    var totalMovies = {}
+    if (!this.data.isEmpty) {
+      totalMovies = this.data.movies.concat(movies);
+    }
+    else {
+      totalMovies = movies;
+      this.data.isEmpty = false;
+    }
+    this.setData({
+      movies: totalMovies
+    })
+    this.data.totalCount += 20;
+    
   },
 
 
-  
   onReady:function(event){
     wx.setNavigationBarTitle({
       title: this.data.navigationBarTitle,
