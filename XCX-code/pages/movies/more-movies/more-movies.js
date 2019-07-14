@@ -26,15 +26,30 @@ Page({
     }
    //为了其他函数能够调用，将目前请求的dataUrl 赋值给requestUrl
     this.data.requestUrl=dataUrl
-
     util.http(dataUrl, this.processMovieData)
+   
   },
 
-  onScrollerLower:function(event){
+  // onScrollerLower:function(event){
+  //   var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20"
+  //   util.http(nextUrl, this.processMovieData)
+  //   wx.showNavigationBarLoading()
+  // },
+ 
+ //由于scroll-view跟下拉刷新不兼容，只能用这个onReachBottom函数，需要在json里面配置"onReachBottomDistance":50
+  onReachBottom:function(event){
     var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20"
     util.http(nextUrl, this.processMovieData)
-    console.log("加载更多")
-    
+    wx.showNavigationBarLoading()
+  },
+
+//需要在json里面配置"enablePullDownRefresh":true
+  onPullDownRefresh:function(event){
+    var refreshUrl =this.data.requestUrl+"?start=0&count=20";
+    this.data.movies={};
+    this.data.isEmpty=true;
+    util.http(refreshUrl, this.processMovieData)
+    wx.showNavigationBarLoading()
   },
 
   processMovieData: function (moviesDouban) {
@@ -68,7 +83,9 @@ Page({
     this.setData({
       movies: totalMovies
     })
+    wx.hideNavigationBarLoading();
     this.data.totalCount += 20;
+    wx.stopPullDownRefresh() 
     
   },
 
