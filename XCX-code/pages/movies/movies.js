@@ -2,6 +2,14 @@ var util = require('../utils/util.js');
 var app = getApp();
 
 Page({
+   data:{
+     inThreatersUrl:{},
+      comingSoon:{},
+     top250:{},
+     containerShow:true,
+     searchPanelShow:false
+
+   },
 
 
   onLoad:function(event){
@@ -71,10 +79,21 @@ Page({
         categoryTitle:categoryTitle
       }
       this.setData(readyData)
-
     }
-  
+  },
+  onBindFocus:function(event){
+   this.setData({
+     containerShow:false,
+     searchPanelShow:true
 
+   })
+  },
+  onCancleTap:function(event){
+    this.setData({
+      containerShow: true,
+      searchPanelShow: false
+
+    })
   }
   
 })
