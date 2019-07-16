@@ -6,6 +6,7 @@ Page({
      inThreatersUrl:{},
       comingSoon:{},
      top250:{},
+     searchResult:{},
      containerShow:true,
      searchPanelShow:false
 
@@ -94,6 +95,13 @@ Page({
       searchPanelShow: false
 
     })
+  },
+
+  onBindChange:function(event){
+    var text = event.detail.value;
+    var searchUrl = app.globalData.doubanBase +'/v2/movie/search?q=' + text +"&start=0&count=10";
+    this.getMovieDataList(searchUrl,"searchResult"+"")
   }
+
   
 })
