@@ -54,6 +54,13 @@ Page({
 
   },
 
+  onMovieTap:function(event){
+    var movieId=event.currentTarget.dataset.movieid;
+    wx.navigateTo({
+      url: 'movie-detail/movie-detail?id=' + movieId,
+    })
+  },
+
   processMovieData: function (moivesDouBan, settledKey,categoryTitle){
     var movies =[];
     for (var idx in moivesDouBan.subjects){
